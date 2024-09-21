@@ -1,6 +1,9 @@
 package com.example.lab2
 
 import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -17,6 +20,31 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        val inputFieldN = findViewById<EditText>(R.id.editTextNumber);
+        val inputFieldA = findViewById<EditText>(R.id.editTextNumberDecimal);
 
+        val button = findViewById<Button>(R.id.button);
+        val resultText = findViewById<TextView>(R.id.textView);
+
+        button.setOnClickListener() {
+            try {
+                val n = inputFieldN.text.toString().toInt();
+                val a = inputFieldA.text.toString().toFloat();
+
+                var sum = 0f
+                for (i in 0..n) {
+                    var term = 1f;
+                    for (j in 0..i) {
+                        term *= (a + j)
+                    }
+                    sum += (1f/term)
+                    println(sum)
+                }
+
+                resultText.text = sum.toString()
+            } catch (e : Exception) {
+                resultText.text = "Ошибка ввода"
+            }
+        }
     }
 }
